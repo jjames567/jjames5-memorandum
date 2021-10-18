@@ -2,11 +2,33 @@
 
 1. 集合类的hashmap和hashtable的区别
 
+   HashTable父类是Dictionary类，HashMap父类是AbtractMap类，但他们都实现了Map接口。
+
+   HashTable是同步方法。
+
+   HashTable的key和value都不允许为null。
+
+   HashTable直接使用对象的hashCode，HashMap重新计算hash值。（高16位右移到低16位，和原来的hash值进行异或运算，得到新hash值）。
+
+   HashTable数组初始大小为11，扩容为2倍+1，HashMap初始大小为16，扩容为2倍。
+
+   HashTable在执行构造方法时数组会初始化，而HashMap是在第一次put的时候才初始化。
+
 2. 进程和线程的区别
 
-3. 简单工厂和抽象工厂的区别
+3. 快速失败和安全失败
 
-4. jdk，jre，jvm的区别
+   安全失败机制的集合容器，在遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，在拷贝的集合上进行遍历。
+
+4. 简单工厂和抽象工厂的区别
+
+   简单工厂模式通过判断type来创建对应的对象，假如以后需要增加或者删除类，则需要修改工厂的代码，这样违反了开闭原则。
+
+   工厂方法模式则是创建多个工厂，分别来创建对应的类对象，符合开闭原则，但是会增加系统的复杂度，类的数量会增多。
+
+   抽象工厂模式里，一个工厂可以生产多种产品，跟简单工厂相比功能更强，但是他们都违反开闭原则，在增加产品时需要修改原有代码。
+
+5. jdk，jre，jvm的区别
 
    **JDK包含了JRE，JRE包含了JVM**
 
@@ -18,9 +40,9 @@
 
    <img src="https://raw.githubusercontent.com/jjames567/picture/main/image-20210817174327420.png" alt="image-20210817174327420" style="zoom:33%; margin-left:-5px" />
 
-5. 对mysql事务的理解，mysql那个存储引擎支持事务
+6. 对mysql事务的理解，mysql那个存储引擎支持事务
 
-6. 提高查找mysql查询速度，除了索引还有其他办法吗？
+7. 提高查找mysql查询速度，除了索引还有其他办法吗？
 
    **设计类：**
 
@@ -166,17 +188,17 @@
 
    8. 避免大事务
 
-7. epoll和select的区别
+8. epoll和select的区别
 
    https://mp.weixin.qq.com/s?__biz=MzUxODAzNDg4NQ==&mid=2247489558&idx=1&sn=7a96604032d28b8843ca89cb8c129154&scene=21#wechat_redirect
 
-8. tcp连接的过程
+9. tcp连接的过程
 
    三次握手
 
-9. http1.0和http1.1的区别
+10. http1.0和http1.1的区别
 
-10. 稳定[排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)和不稳定[排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)的区别，有哪些稳定和不稳定[排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)
+11. 稳定[排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)和不稳定[排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)的区别，有哪些稳定和不稳定[排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)
 
     稳定的排序：
 
@@ -193,22 +215,22 @@
     3. 希尔排序（特殊的插排，但在不同的步长下可能导致元素之间位置来回改变）
     4. 堆排序（堆顶和最后一个节点互换时，假如值相同则破坏了稳定性）
 
-11. 快排的思路
+12. 快排的思路
 
-12. [1亿的的数字中找到最大的10个](https://www.nowcoder.com/jump/super-jump/practice?questionId=23263)
+13. [1亿的的数字中找到最大的10个](https://www.nowcoder.com/jump/super-jump/practice?questionId=23263)
 
     1. 快排：通过partition找到一个数的位置，判断下标是否是length-10，假如较大的话就去左边继续找，较小的话就去右边找，直到找到刚好下标的位置，那么该数的右边就是最大的10个数。
     2. 堆排：取前10个数构建最小堆，然后遍历后面的数，比较堆顶和遍历数的大小，比堆顶小的则跳过，比堆顶大的则替换堆顶，再调整形成最小堆，直到遍历整个数组，整个最小堆就是最大的10个数。
 
-13. [项目](https://www.nowcoder.com/jump/super-jump/word?word=项目)的难点
+14. [项目](https://www.nowcoder.com/jump/super-jump/word?word=项目)的难点
 
-14. MySQL插入一条语句如何写？插入1000条？
+15. MySQL插入一条语句如何写？插入1000条？
 
     1. insert into values 或 insert into select批量插入时，都满足事务的原子性与一致性，但要注意insert into select的加锁问题。
     2. replace into与insert into on duplicate key update都可以实现批量的插入更新，具体是更新还是插入取决与记录中的pk或uk数据在表中是否存在。如果存在，前者是先delete后insert，后者是update。
     3. insert ignore into会忽略很多数据上的冲突与约束，平时很少使用。
 
-15. Redis的用途
+16. Redis的用途
 
     1. 热点数据的缓存
     2. 限时业务的运用
@@ -219,26 +241,26 @@
     7. 分页、模糊搜索（ZSET 中的 ZRANGEBYLEX）
     8. 点赞（SET 的 SISMEMBER）
 
-16. SpringBoot相比于Spring的优点
+17. SpringBoot相比于Spring的优点
 
     1. 通过 starter 将依赖自动添加到项目中
     2. 内嵌容器支持（Tomcat、Jetty、Undertow）
     3. Actuator 监控
     4. 约定大于配置（将存在的依赖项进行自动配置）
 
-17. ReentrantLock
+18. ReentrantLock
 
-18. ConcurrentHashMap与HashMap
+19. ConcurrentHashMap与HashMap
 
-19. 一个学生类按照性别分组用lambda怎么写？遍历[链表](https://www.nowcoder.com/jump/super-jump/word?word=链表) 用 lambda怎么写？
+20. 一个学生类按照性别分组用lambda怎么写？遍历[链表](https://www.nowcoder.com/jump/super-jump/word?word=链表) 用 lambda怎么写？
 
     ```java
     Map<String, List<Student>> singleMap = studentList.stream().collect(Collectors.groupingBy(Student::getCode));
     ```
 
-20. 分布式事务优缺点？
+21. 分布式事务优缺点？
 
-21. hashmap和treemap的应用场景？
+22. hashmap和treemap的应用场景？
 
     TreeMap 实现了 SortMap 接口，其能够根据键排序，默认是按键的升序排序，也可以指定排序的比较器，当用 Iterator 遍历 TreeMap 时得到的记录是排过序的，所以在插入和删除操作上会有些性能损耗，TreeMap 的键不能为空，其为非并发安全 Map，此外 TreeMap 基于红黑树实现。
     **key 不允许为 null，因为需要进行排序。**
@@ -258,7 +280,7 @@
     2. 线程安全的 Map 都不允许 value 为 null；
     3. 不允许 key 为 null 的 Map 要不就是需要计算 HashCode，要不就是需要调用 CompareTo 方法。
 
-22. 多线程的优缺点？
+23. 多线程的优缺点？
 
     优点：
 
@@ -272,48 +294,48 @@
     3. 程序复杂度上升
     4. 存在线程安全问题
 
-23. 多线程的应用场景？
+24. 多线程的应用场景？
 
     1. 定时任务（定时爬虫、统计信息、上传文件）
     2. 异步任务（尽快响应，提高用户体验）
     3. 分布式计算
 
-24. 线程越多越好吗？会有什么问题？
+25. 线程越多越好吗？会有什么问题？
 
-25. 怎么设置线程池最优线程数？最优的线程数？
+26. 怎么设置线程池最优线程数？最优的线程数？
 
-    对于 CPU 密集型的场景下，线程数一般为 n + 1；
+    对于 CPU 密集型的场景下，线程数一般为 n + 1；（当线程因为偶尔的内存页失效或其他原因导致阻塞时， 这个额外的线程可以顶上， 从而保证CPU的利用率 ）
 
     对于 IO 密集型的场景下，线程数为 CPU 核心数 * (1 + IO 耗时/ CPU 耗时)；
 
     还有一种方式就是阻塞系数，但是不好记就不记录了。
 
-26. 发生内存溢出的地方？
+27. 发生内存溢出的地方？
 
     1. 堆溢出：存在内存泄漏（可以让jvm在OOM时Dump出当前的内存堆快照）、堆分配得到的内存过小。
     2. 栈溢出：栈深度大于虚拟机所允许的最大深度 或者 扩展栈时无法申请到足够的空间。
     3. 方法区：大量的类被加载导致PermSize空间不足，可以通过-XX:PermSize 和 -XX:MaxPermSize限制方法区大小。
     4. 本机内存溢出：程序中直接或者间接的使用了nio，通过DirectByteBuffer请求内存，内存不足时也有可能产生OOM。明显特征是出现OOM时dump下来的文件很小，没有明显的异常信息。DirectMemory容量可以通过-XX：MaxDirectMemorySize指定，如果不指定跟Java堆最大值一样。
 
-27. 怎么让本地内存溢出？具体怎么实现？
+28. 怎么让本地内存溢出？具体怎么实现？
 
     调整 MaxDirectMemorySize 参数值，使用 nio 包下的 ByteBuffer.allocateDirect(`        `1024`        `*`        `1024`        `*`        `512`        `) 来申请本地内存。
 
     同时可以使用 cleaner.clean()方法来清除直接内存。
 
-28. [redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)分布式锁
+29. [redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)分布式锁
 
-29. 缓存雪崩和解决方案
+30. 缓存雪崩和解决方案
 
-30. 如何限流
+31. 如何限流
 
-31. JWT令牌和token
+32. JWT令牌和token
 
-32. 网络协议安全
+33. 网络协议安全
 
-33. HTTPS加密[算法](https://www.nowcoder.com/jump/super-jump/word?word=算法)和原理
+34. HTTPS加密[算法](https://www.nowcoder.com/jump/super-jump/word?word=算法)和原理
 
-34. 面向过程和面向对象的区别，举例子
+35. 面向过程和面向对象的区别，举例子
 
     面向过程就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候一个一个依次调用就可以了；面向对象是把构成问题事物分解成各个对象，建立对象的目的不是为了完成一个步骤，而是为了描叙某个事物在整个解决问题的步骤中的行为。
 
@@ -329,7 +351,7 @@
 
     ​	缺点：性能比面向过程低
 
-35. 数据库的一二三范式，举例子
+36. 数据库的一二三范式，举例子
 
     第一范式：列不可再分（地址可以分为省、市、详细地址等），确保不产生冗余数据。
 
@@ -339,17 +361,47 @@
 
     比如Student表（学号，姓名，年龄，性别，所在院校，院校地址，院校电话）这样一个表结构，就存在上述关系。 学号--> 所在院校 --> (院校地址，院校电话)。我们应该拆开来，如下：（学号，姓名，年龄，性别，所在院校）--（所在院校，院校地址，院校电话）
 
-36. 讲一下MySQL的索引原理（B+数）
+37. 讲一下MySQL的索引原理（B+数）
 
-37. 你熟悉的集合有哪些？
+38. 你熟悉的集合有哪些？
 
-38. ArrayList和LinkedList的区别
+39. ArrayList和LinkedList的区别
 
-39. JVM的内存结构、回收[算法](https://www.nowcoder.com/jump/super-jump/word?word=算法)和回收器
+    ArrayList是实现了基于动态数组的数据结构，LinkedList基于双向链表的数据结构。 
 
-40. 讲一下hashmap的get流程
+    对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。 
 
-41. 讲一下[链表](https://www.nowcoder.com/jump/super-jump/word?word=链表)和[红黑树](https://www.nowcoder.com/jump/super-jump/word?word=红黑树)两个结构
+    对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。
+
+    时间复杂度：通过下标来查数据时，数组是O(1)，链表是O(n)。
+
+    空间：ArrayList的空间浪费主要体现在在list列表的结尾预留一定的容量空间，而LinkedList的空间花费则体现在它的每一个元素都需要消耗相当的空间
+
+    场景：在利用Collections.reverse()或者要对list进行大量的插入和删除操作时，LinkedList性能更好。
+
+40. JVM的内存结构、回收[算法](https://www.nowcoder.com/jump/super-jump/word?word=算法)和回收器
+
+41. 讲一下hashmap的get流程
+
+    通过key的Hash找到唯一的桶位。寻找方法和put过程中是相同的，(capacity-1)&hash
+    找到具体桶位，现在有两种情况
+
+    如果首元素的key和目标key相同，则返回首元素。
+    如果首元素的key不相同。判断有没有第二个元素
+        如果没有，在该桶位处就没必要再找，直接返回null。
+        如果有第二元素。判断首元素类型
+            如果为链表，采用do-while循环遍历桶中链表。
+            如果为红黑树，用红黑树的遍历方式getTreeNode()；
+                首先找到根节点Root，从根节点向下找。
+                然后，根据查找key的hash值和当前node的hash值比较
+                    如果大于，就向右边找。
+                    如果小于，就向左找。
+                    如果相同并比较equals相同，就返回当前节点
+                    如果左孩子没有了，就向右孩子找。
+                    如果右孩子没有了，就向左孩子找。
+                    如果没有找到就进入下一轮递归寻找。
+
+42. 讲一下[链表](https://www.nowcoder.com/jump/super-jump/word?word=链表)和[红黑树](https://www.nowcoder.com/jump/super-jump/word?word=红黑树)两个结构
 
     红黑树：
 
@@ -367,9 +419,11 @@
 
     左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。
 
-42. jdk1.7 和 jdk1.8 hashmap扩容机制
+43. jdk1.7 和 jdk1.8 hashmap扩容机制
 
-43. 线程池参数
+    https://blog.csdn.net/u012501054/article/details/103710171/
+
+44. 线程池参数
 
     1. 核心线程数
     2. 最大线程数
@@ -379,7 +433,7 @@
     6. 等待队列
     7. 拒绝策略（抛异常、使用当前线程执行、丢弃、与最早任务竞争）
 
-44. 线程池有哪些
+45. 线程池有哪些
 
     1. Executors.newSingleThreadExecutor()
 
@@ -393,7 +447,7 @@
 
        0核心，max最大，队列长度为0
 
-45. innodb的底层原理
+46. innodb的底层原理
 
     <img src="https://raw.githubusercontent.com/jjames567/picture/main/640" alt="图片" style="zoom: 67%; margin-left: -5px;" />
 
@@ -484,85 +538,109 @@
 
     3. 
 
-46. 最左匹配原则
+47. 最左匹配原则
 
-47. 缓存与数据库数据不一致
+48. 缓存与数据库数据不一致
 
-48. 重载和重写区别
+49. 重载和重写区别
 
-49. 面向对象三大特征
+50. 面向对象三大特征
 
-50. 接口和抽象类区别
+51. 接口和抽象类区别
 
-51. 数据库隔离级别
+    1. 抽象类必须用public、protect修饰，接口必须用public修饰
+    2. 接口变量只能是public static final且必须给出初始值，方法必须是public
 
-52. 间隙锁
+52. 数据库隔离级别
 
-53. mysql的默认隔离级别能否解决幻读
+53. 间隙锁
 
-54. 手写sql语句。表A中有字段id和name,查询重复的name
+54. mysql的默认隔离级别能否解决幻读
 
-55. spring的Aop
+55. 手写sql语句。表A中有字段id和name,查询重复的name
 
-56. 线程池
+56. spring的Aop
 
-57. session不一致情况
+57. 线程池
 
-58. 集合类collection下有哪些集合
+58. session不一致情况
 
-59. 线程安全的集合有哪些
+59. 集合类collection下有哪些集合
 
-60. CopyOnWriteArrayList原理
+60. 线程安全的集合有哪些
 
-61. 如何对集合[排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)
+61. CopyOnWriteArrayList原理
 
-62. 说说实习干了啥，遇到问题怎么解决，重构了[项目](https://www.nowcoder.com/jump/super-jump/word?word=项目)有什么优点？
+62. 如何对集合[排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)
 
-63. 为什么想应聘shein
+63. 说说实习干了啥，遇到问题怎么解决，重构了[项目](https://www.nowcoder.com/jump/super-jump/word?word=项目)有什么优点？
 
-64. 多线程的优缺点
+64. 为什么想应聘shein
 
-65. 说说垃圾收集器，cms和g1的初始标记是否都会STW
+65. 多线程的优缺点
 
-66. cms和g1的区别，各自的应用场景
+66. 说说垃圾收集器，cms和g1的初始标记是否都会STW
 
-67. OSI七层模型和TCP/IP模型； 
+67. cms和g1的区别，各自的应用场景
 
-68. socket是哪一层（传输层），websocket是哪一层（应用层）； 
+    过程不同：
 
-69. 说说[redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)有哪些数据结构；
+    - cms初始标记->并发标记->重新标记->并发清理
+    - g1初始标记->并发标记->最终标记->筛选回收
 
-70. 如何用[redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)的数据结构存储用户的登录状态以及流程判断（string）；
+    清理方式不同：
 
-71. 如何判断一个数是否为2的幂次；
+    -  cms标记清理法
+    -  g1年轻代复制算法，老年代标记整理算法
 
-72. 什么是事务？事务的隔离界别？mysql默认哪一种？
+    处理错标的方法不同：
 
-73. SQL调优
+    - cms是增量更新的方式
+    - g1是原始快照的方式
 
-74. Java集合了解哪些？ArrayList和LinkedList的区别？如何保证ArrayList线程安全？如何对集合元素进行[排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)？
+68. OSI七层模型和TCP/IP模型； 
 
-75. 如何创建线程？如何判断线程是否正在运行？线程池说一下
+69. socket是哪一层（传输层），websocket是哪一层（应用层）； 
 
-76. [redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)的数据结构？有哪些命令？
+70. 说说[redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)有哪些数据结构；
 
-77. Redis在[项目](https://www.nowcoder.com/jump/super-jump/word?word=项目)里怎么用的？[项目](https://www.nowcoder.com/jump/super-jump/word?word=项目)里超卖场景怎么解决？（用[redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)分布式锁）
+71. 如何用[redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)的数据结构存储用户的登录状态以及流程判断（string）；
 
-78. JVM的内存区域说一下，分别用来存什么 
+72. 如何判断一个数是否为2的幂次；
 
-79. 做过什么[项目](https://www.nowcoder.com/jump/super-jump/word?word=项目)
+    n & (n-1)
 
-80. 如何解决Mysql数据库和ES数据不一致问题，如果数据库写失败了怎么办，ES写失败了怎么办
+73. 什么是事务？事务的隔离界别？mysql默认哪一种？
 
-81. 树的遍历方式有哪些
+74. SQL调优
 
-82. [动态规划](https://www.nowcoder.com/jump/super-jump/word?word=动态规划)定义，核心，思想是什么
+75. Java集合了解哪些？ArrayList和LinkedList的区别？如何保证ArrayList线程安全？如何对集合元素进行[排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)？
 
-83. [排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)[算法](https://www.nowcoder.com/jump/super-jump/word?word=算法)了解哪些？快排说一下 
+    线程安全：
 
-84. Java中CMS说一下 
+    1. 自行加锁
+    2. 使用Collections.synchronizedList(new ArrayList<>()); 里面有mutex对象，默认为this。
+    3. 使用CopyOnWriteArrayList，利用写时复制技术思想，在添加元素时进行加锁，创建len+1的新数组，拷贝旧数组，再往新数组进行插入，最后赋值给原数组。get操作是不需要加锁的。
 
-85. HashMap 和 HashTable区别 
+76. 如何创建线程？如何判断线程是否正在运行？线程池说一下
+
+77. [redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)的数据结构？有哪些命令？
+
+78. Redis在[项目](https://www.nowcoder.com/jump/super-jump/word?word=项目)里怎么用的？[项目](https://www.nowcoder.com/jump/super-jump/word?word=项目)里超卖场景怎么解决？（用[redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)分布式锁）
+
+79. JVM的内存区域说一下，分别用来存什么 
+
+80. 做过什么[项目](https://www.nowcoder.com/jump/super-jump/word?word=项目)
+
+81. 如何解决Mysql数据库和ES数据不一致问题，如果数据库写失败了怎么办，ES写失败了怎么办
+
+82. 树的遍历方式有哪些
+
+83. [动态规划](https://www.nowcoder.com/jump/super-jump/word?word=动态规划)定义，核心，思想是什么
+
+84. [排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)[算法](https://www.nowcoder.com/jump/super-jump/word?word=算法)了解哪些？快排说一下 
+
+85. Java中CMS说一下 
 
 86. HashMap的key可以为null么 
 
@@ -581,6 +659,8 @@
 93. 泛型，java的接口和抽象类的区别， 
 
 94. jvm的划分，创建一个数组，在jvm的流程，调用这个数组，在jvm的流程； 
+
+    https://www.bilibili.com/read/cv5148400
 
 95. 垃圾回收相关[算法](https://www.nowcoder.com/jump/super-jump/word?word=算法)，新生代和老年代的[算法](https://www.nowcoder.com/jump/super-jump/word?word=算法)及空间划分 
 
@@ -630,6 +710,18 @@
 
 118. post和get的区别
 
+     表面上是GET把参数包含在URL中，POST通过request body传递参数
+
+     但实际上他们都是HTTP协议中的方法，而HTTP的底层是TCP/IP，所以GET和POST都是TCP连接，他们能做的事情都是一样的，在技术上，我要给GET加body，给POST带url参数都是可以的，只是这不符合HTTP的行为准则。
+
+     在get请求加上body，可能服务器会直接忽略导致数据接收不到。
+
+     那他们的真正区别是：GET产生一个TCP数据包；POST产生两个TCP数据包。
+
+     对于POST，浏览器会先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok。但是火狐浏览器的POST请求就只会发送一次。
+
+     有团队说建议GET代替POST，但是不可以，因为他们都有自己的语义，并且在网络好的情况下，两者时间差基本可以无视，网络差的情况下，两次TCP在数据的完整性上有很大优势。
+
 119. tcp三次握手
 
 120. http协议代表内容类型的字段
@@ -645,6 +737,10 @@
      命名管道在linux中具体怎么实现的？
 
 125. 你就随便说下linux中网络编程的5个io模型是怎么实现的吧。
+
+     https://zhuanlan.zhihu.com/p/115912936
+
+     https://baijiahao.baidu.com/s?id=1690471158702755453&wfr=spider&for=pc
 
 126. java线程池 
 
@@ -662,6 +758,8 @@
 
 133. SpringAOP用到什么设计模式 
 
+     代理模式、适配器模式、单例模式、责任链模式、装饰器模式
+
 134. JVM包括什么 
 
 135. 运行时数据区包括什么 
@@ -674,105 +772,124 @@
 
 139. SpringBean的作用域有什么 
 
+     Singleton、Propagate、Request、Session、Global Session
+
 140. 单例模式可以保证bean安全吗 
 
+     不能
+
 141. 如何实现Bean的安全 
+
+     1. 可以Controller类上加注解@Scope("prototype")或@Scope("request")
+     2. 使用ThreadLocal会有问题，因为服务器的线程是复用的，因此不能解决线程安全
+     3. 把全局变量替换成局部变量
 
 142. 为什么要三次握手四次挥手 
 
 143. 如果出现大量的TIME-WAIT连接是为什么 
 
-144. HashMap讲一下 
+     一个TCP/IP连接断开以后，会通过TIME_WAIT的状态保留一段时间，时间过了才会释放这个端口，当端口接受的频繁请求数量过多的时候，就会产生大量的TIME_WAIT状态的连接，这些连接占着端口，会消耗大量的资源。 
 
-145. 为什么使用[红黑树](https://www.nowcoder.com/jump/super-jump/word?word=红黑树)，不使用B+树
+144. 为什么使用[红黑树](https://www.nowcoder.com/jump/super-jump/word?word=红黑树)，不使用B+树
 
-146. 数据库使用过什么引擎 
+     如果用B+树的话，在数据量不是很多的情况下，数据都会“挤在”一个结点里面。这个时候遍历效率就退化成了链表。
 
-147. InnoDB使用什么索引
+145. ConcurrentHashmap讲一下 
 
-148. B树索引和B+树索引有什么区别 
+     1.7使用分段锁，并发量低，取决于Segment的大小；1.8使用了Synchronized+CAS来将锁的粒度减少为链表头，不使用Reentranlock的原因是Node要实现AQS，这样的话需要消耗大量无用的空间，因为仅仅是链表头的Node需要用到。
 
-149. ConcurrentHashmap讲一下 
+     1.7在定位下标时需要定位两次，先定位Segment下标，再定位HashEntry下标。
 
-150. Hashmap1.7和1.8的区别 
+146. Hashmap1.7和1.8的区别 
 
-151. mysql的两种索引说一说？ 
+     1. 数据结构不同。
+     2. 计算hash值的扰动函数不同。
+     3. 扩容后计算下标的方式不同，1.8通过规律推出，避免了重新计算。
+     4. 扩容后插入链表的方式不同。
+     5. 遇到哈希冲突时处理方式不同，1.8在链表长度>8并且元素大于64的时候会转化成红黑树，提高效率。
 
-152. mysql的两种索引分别用于什么场景？ 
+     https://blog.csdn.net/zhengwangzw/article/details/104889549?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163443805716780274129364%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=163443805716780274129364&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-104889549.pc_search_result_cache&utm_term=hashmap&spm=1018.2226.3001.4187
 
-153. arraylist ，linkedlist
+147. mysql的两种索引说一说？ 
 
-154. map用过吗，hashmap说一下
+148. mysql的两种索引分别用于什么场景？ 
 
-155. hashmap扩容为什么要2的整数次幂
+149. hashmap扩容为什么要2的整数次幂
 
-156. [链表](https://www.nowcoder.com/jump/super-jump/word?word=链表)长度到8变成[红黑树](https://www.nowcoder.com/jump/super-jump/word?word=红黑树)，为什么是8
+     n & (n-1)
 
-157. comcurrenthashmap说一下
+150. [链表](https://www.nowcoder.com/jump/super-jump/word?word=链表)长度到8变成[红黑树](https://www.nowcoder.com/jump/super-jump/word?word=红黑树)，为什么是8
 
-158. 为什么1.8改用cas+synchronized
+     因为经过计算，在hash函数设计合理的情况下，发生hash碰撞8次的几率为百万分之6，概率说话。。因为8够用了，至于为什么转回来是6，因为如果hash碰撞次数在8附近徘徊，会一直发生链表和红黑树的互相转化，为了预防这种情况的发生。
 
-159. 刚刚说到[红黑树](https://www.nowcoder.com/jump/super-jump/word?word=红黑树)，[红黑树](https://www.nowcoder.com/jump/super-jump/word?word=红黑树)说一说
+151. 为什么1.8改用cas+synchronized
 
-160. 分析[红黑树](https://www.nowcoder.com/jump/super-jump/word?word=红黑树)的[算法](https://www.nowcoder.com/jump/super-jump/word?word=算法)复杂度(没答上来，忘了，小哥哥建议我之后去了解)
+     - 减少内存开销:如果使用ReentrantLock则需要节点继承AQS来获得同步支持，增加内存开销，而1.8中只有头节点需要进行同步。
+     - 内部优化:synchronized则是JVM直接支持的，JVM能够在运行时作出相应的优化措施：锁粗化、锁消除、锁自旋等等。
 
-161. 谈谈其他树，分别的应用(说了b+树，查找树，平衡树)
+152. 谈谈其他树，分别的应用(说了b+树，查找树，平衡树)
 
-162. b+树为什么适合做innodb底层数据结构
+153. b+树为什么适合做innodb底层数据结构
 
-163. 手撕:[二叉树](https://www.nowcoder.com/jump/super-jump/word?word=二叉树)层序遍历
+154. 手撕:[二叉树](https://www.nowcoder.com/jump/super-jump/word?word=二叉树)层序遍历
 
-164. 说说其他数据结构(栈，队列，图)
+155. 说说其他数据结构(栈，队列，图)
 
-165. Redis哪些数据结构，底层分别怎么实现
+156. Redis哪些数据结构，底层分别怎么实现
 
-166. 手撕:一个单[链表](https://www.nowcoder.com/jump/super-jump/word?word=链表)，求最大的前k个数
+157. 手撕:一个单[链表](https://www.nowcoder.com/jump/super-jump/word?word=链表)，求最大的前k个数
 
-167. 手撕:最大子数组。一个数组[1，3，4，8，9]，另一个数组[2，3，4，8，10]，他们最长子数组是[3，4，8]。口述思路
+158. 手撕:最大子数组。一个数组[1，3，4，8，9]，另一个数组[2，3，4，8，10]，他们最长子数组是[3，4，8]。口述思路
 
-168. AOP 原理和[源码](https://www.nowcoder.com/jump/super-jump/word?word=源码)
+159. AOP 原理和[源码](https://www.nowcoder.com/jump/super-jump/word?word=源码)
 
-169. [红黑树](https://www.nowcoder.com/jump/super-jump/word?word=红黑树)
+160. 8种基本类型 int short char byte boolean double float long
 
-170. 缓存机制
+161. 遍历树的方式 介绍下前中后序遍历
 
-171. 学习Java的方式、看的书
+162. mysql的InnoDB引擎 索引底层数据结构 MyISAM呢 
 
-172. 8种基本类型
+     **myisam保存表具体行数；innodb不保存**。
 
-173. 遍历树的方式 介绍下前中后序遍历
+163. InnoDB 为什么用B+树 而不用B树 
 
-174. mysql的InnoDB引擎 索引底层数据结构 MyISAM呢 
+164. 从树的方面来解释下mysql索引的最左匹配原则吗
 
-175. InnoDB 为什么用B+树 而不用B树 
+165. TCP 三次握手 四次挥手 为什么是三次
 
-176. 从树的方面来解释下mysql索引的最左匹配原则吗
+166. 怎么遍历hashmap 还有其他方法吗
 
-177. TCP 三次握手 四次挥手 为什么是三次
+167. 怎么遍历list呢 能一边遍历 一边删除吗
 
-178. 怎么遍历hashmap 还有其他方法吗
+168. hashMap jdk1.8 的改进
 
-179. 怎么遍历list呢 能一边遍历 一边删除吗
+     1. 数据结构
+     2. 尾插法
+     3. 计算扩容后的hash值
 
-180. hashMap jdk1.8 的改进
+169. 怎么实现一个线程
 
-181. 怎么实现一个线程
+170. 线程池常见的参数
 
-182. 线程池常见的参数
+171. volatile关键字有什么作用 指令重排是干啥的
 
-183. volatile关键字有什么作用 指令重排是干啥的
+172. Spring 事务是怎么控制的？ 注解的实现原理知道吗 我说不知道 面试官说提示一下是AOP 我还是不会。。
 
-184. Spring 事务是怎么控制的？ 注解的实现原理知道吗 我说不知道 面试官说提示一下是AOP 我还是不会。。
+     1. 基于xml的声明式事务
+     2. 基于注解的声明式事务
+     3. 编程式事务
 
-185. 事务的隔离级别 分别能解决什么问题 默认是哪个隔离级别 Spring中的隔离级别 如果Spring中设置的隔离级别和数据库中的不一样 生效的会是哪个
+173. 事务的隔离级别 分别能解决什么问题 默认是哪个隔离级别 Spring中的隔离级别 如果Spring中设置的隔离级别和数据库中的不一样 生效的会是哪个
 
-186. Mybatis 中 $ # 哪个能防止 sql 注入 为什么能防止
+     **生效的是spring的隔离级别。**
+
+174. Mybatis 中 $ # 哪个能防止 sql 注入 为什么能防止
 
      #{} 有预编译，${} 只是替换字符，${} 不能防止 sql 注入，一般用于传递表名，数据库名等。
 
-187. $ # 除了在防止sql注入 其他方面还有什么区别吗
+175. $ # 除了在防止sql注入 其他方面还有什么区别吗
 
-188. MyBais 一级 二级缓存
+176. MyBais 一级 二级缓存
 
      1）一级缓存 Mybatis的一级缓存是指SQLSession，一级缓存的作用域是SQlSession, Mabits默认开启一级缓存。 在同一个SqlSession中，执行相同的SQL查询时；第一次会去查询数据库，并写在缓存中，第二次会直接从缓存中取。 当执行SQL时候两次查询中间发生了增删改的操作，则SQLSession的缓存会被清空。 每次查询会先去缓存中找，如果找不到，再去数据库查询，然后把结果写到缓存中。 Mybatis的内部缓存使用一个HashMap，key为hashcode+statementId+sql语句。Value为查询出来的结果集映射成的java对象。 SqlSession执行insert、update、delete等操作commit后会清空该SQLSession缓存。
 
@@ -780,71 +897,69 @@
 
      2）二级缓存 二级缓存是mapper级别的，Mybatis默认是没有开启二级缓存的。 第一次调用mapper下的SQL去查询用户的信息，查询到的信息会存放代该mapper对应的二级缓存区域。 第二次调用namespace下的mapper映射文件中，相同的sql去查询用户信息，会去对应的二级缓存内取结果。
 
-189. Redis操作list的操作
+177. Redis操作list的操作
 
-190. 什么是面向对象编程 
+178. 什么是面向对象编程 
 
-191. Java三大特性 
+179. Java三大特性 
 
-192. 事务有哪些隔离级别，Mysql默认的是什么隔离级别 
+180. 事务有哪些隔离级别，Mysql默认的是什么隔离级别 
 
-193. Java常用的集合类有哪些 
+181. Java常用的集合类有哪些 
 
-194. 你使用过哪些设计模式，挑几个重点讲一讲实现 
+182. 你使用过哪些设计模式，挑几个重点讲一讲实现 
 
-195. 双重校验锁如何实现？（这里我回答漏了voliate关键字） 
+183. 双重校验锁如何实现？（这里我回答漏了voliate关键字） 
 
-196. Java中的抽象类和接口有什么区别？ 
+184. Java中的抽象类和接口有什么区别？ 
 
-197. 抽象类中可以定义变量，编写实现吗？ 
+185. 抽象类中可以定义变量，编写实现吗？ 
 
-198. JVM有了解过吗？它管理的内存区域分为哪些？ 
+186. JVM有了解过吗？它管理的内存区域分为哪些？ 
 
-199. 对象创建的过程？
+187. 对象创建的过程？
 
-200. 单点登陆如何实现的？
+188. 单点登陆如何实现的？
 
-     问题一：因为不同域名下会存在跨域问题，假如用cookie存的话，在A站点登录了以后，发送请求到B站点时是不会带上cookie的，因此是不知道用户是否已登录的。
+     https://www.cnblogs.com/ZhuChangwu/p/11997499.html
 
-     解决办法：使用同一个认证服务器，当站点发现用户未登录时，会发送请求到认证服务器，当认证服务器也没有记录时，说明真的没登录，会跳转到登录页面。用户登录后，会从站点转发到认证服务器，认证服务器会生成sessionid并存到redis，最后重定向回站点，之后每次访问站点都会带上token，站点就会查redis判断是否登录。而在不同站点下，站点发现未登录时也会转发到认证服务器，此时因为之前跟认证服务器有session交互，因此认证服务器通过后会带上sessionid重定向回站点，之后这个站点也有token了。同时这个方法也解决了重复授权的问题。
+189. [redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)中有哪些存储类型？底层数据结构分别是什么？
 
-201. [redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)中有哪些存储类型？底层数据结构分别是什么？
+190. springbean生命周期
 
-202. springbean生命周期
+191. springboot自动装配
 
-203. springboot自动装配
+192. 事务隔离级别
 
-204. 事务隔离级别
+193. hashmap,concurrenthashmap（如何线程安全，resize，1.7，1.8的区别）
 
-205. hashmap,concurrenthashmap（如何线程安全，resize，1.7，1.8的区别）
+194. [redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)数据结构,分布式锁
 
-206. [redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)数据结构,分布式锁
+195. hashmap的结构,扩容阈值
 
-207. hashmap的结构,扩容阈值
+196. 两个线程对hashmap同时扩容的后果
 
-208. 两个线程对hashmap同时扩容的后果
+197. gc回收[算法](https://www.nowcoder.com/jump/super-jump/word?word=算法)，垃圾回收器g1,cms解释
 
-209. gc回收[算法](https://www.nowcoder.com/jump/super-jump/word?word=算法)，垃圾回收器g1,cms解释
+198. springmvc的流程
 
-210. springmvc的流程
+199. 对微服务的了解，解释zoo[keep](https://www.nowcoder.com/jump/super-jump/word?word=keep)er
 
-211. 对微服务的了解，解释zoo[keep](https://www.nowcoder.com/jump/super-jump/word?word=keep)er
-
-212. 手写代码，在10亿的商品日志中找出出现最多的一百个商品
+200. 手写代码，在10亿的商品日志中找出出现最多的一百个商品
 
      1. 将日志中的商品根据商品id利用哈希运算写入到多个文件中
      2. 遍历每个文件，利用map计算出每个商品的出现频率
      3. 构建数量为100的小顶堆，遍历每个每个文件中的map，若比堆顶大，则替换堆顶，因为堆顶表示是这个堆里最小的一个数，因此替换后再进行调整，直到遍历完成，堆顶为100个数里的最小值，而整个堆就是最大的100个数。
 
-213. url的组成，一个网址如何找到对应的机器，对应的接口和服务
+201. url的组成，一个网址如何找到对应的机器，对应的接口和服务
 
-214. json的底层实现
+202. json的底层实现
 
-215. jdk 1.8新特性，jdk最新版本是几
+203. jdk 1.8新特性，jdk最新版本是几
 
-216. spring常用注解哪些
+204. spring常用注解哪些
 
-217. count(1)、count(column)、count(*) 的区别
+205. count(1)、count(column)、count(*) 的区别
 
      结果上来说：count(column) 会过滤空值。
 
@@ -852,9 +967,48 @@
 
      1. 有主键的情况下，count(column) 最优
      2. 没有主键的情况下，假如只有一列，count(*) 最优。假如有多列，则 count(1) 最优。
-     
+
      count(1)，其实就是计算一共有多少符合条件的行。
      1并不是表示第一个字段，而是表示一个固定值。
      其实就可以想成表中有这么一个字段，这个字段就是固定值1，count(1)，就是计算一共有多少个1.
-     
+
      count(*)，执行时会把星号翻译成字段的具体名字，效果也是一样的，不过多了一个翻译的动作，比固定值的方式效率稍微低一些。
+
+二面准备：
+
+1. 项目遇到的问题
+
+   1. 如何限流
+
+      1. 通过ip、全局key、url作为key来保存一个Hash，分别有当前令牌数、最大令牌数、令牌产生速率、上次计算令牌的时间。
+      2. 执行脚本传入参数：桶的key、获取的token数、等待时间阈值。
+      3. 执行逻辑：计算生成令牌数，与当前令牌数叠加（与令牌总数取最小值），把当前令牌数减去token，判断大小。
+         - 若小于0，则说明令牌需要预支，**当前令牌数置0，记录时间戳**，此时再计算产生预支的令牌需要多长时间，和时间阈值作比较，大于则返回-1，小于则返回等待时间。
+         - 若大于等于0，**当前令牌数减去token，记录时间戳**，最后返回0。
+      4. 执行脚本后会返回一个微秒数，若为-1，则说明超出时间阈值，若为0则返回true，若大于0则通过sleep来睡眠对应时间后返回true。
+
+   2. 接口如何获取到用户id
+
+      1. 通过Spring的AOP以目标注解为切入点。
+      2. 获取请求头中的Authorization，解析jwt，获取用户id，通过调用joinPoint.getArgs来修改传入参数，使接口能直接拿到用户id来完成相关逻辑。
+
+   3. 更新数据时，怎么删除缓存
+
+      删除操作放到MQ中间件中，假如删除失败了，还能通过重试来删除，假如存在重复消息，通过数据库的唯一索引来解决。
+
+   4. 缓存为空时，怎么更新缓存
+
+      1. 针对获取不到锁的线程：其他线程获取不到分布式锁的时候，休眠一段时间，再重新获取缓存，假如还是为空，就再获取分布式锁，还是空则返回请等待一段时间重试。
+      2. 针对获取到锁的线程：注意在加锁的时候执行setnx和失效时间的合并指令保证原子性，要在写入缓存之后删除key。假如缓存未设置完成，该key就过期了，很可能就会导致其他线程成功获取到锁来写入缓存。但是这个问题在文章查询里影响并不大，甚至有可能提高效率。所以并没有利用watch dog另起一个线程来续签。
+      3. 同时，这个分布式锁也能避免大量io同时访问数据库。
+
+   4. 权限设计：
+
+      **OAuth 就是一种授权机制。数据的所有者告诉系统，同意授权第三方应用进入系统，获取这些数据。系统从而产生一个短期的进入令牌（token），用来代替密码，供第三方应用使用。**
+
+      四种授权方式：
+
+      1. 授权码模式
+      2. 密码模式
+
+      
